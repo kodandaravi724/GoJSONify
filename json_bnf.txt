@@ -1,0 +1,39 @@
+// Define the overall JSON structure, which can be any valid JSON value
+<JSON>     ::= <value> 
+
+// Define a generic JSON value, which could be an object, array, boolean, string, number, or null
+<value>    ::= <object> | <array> | <boolean> | <string> | <number> | <null>
+
+// Define an array in JSON, enclosed in square brackets
+// Arrays may contain zero or more values separated by commas
+<array>    ::= "[" [ <value> *(', ' <value>) ] "]"
+
+// Define an object in JSON, enclosed in curly braces
+// Objects may contain zero or more properties separated by commas
+<object>   ::= "{" [ <property> *(', ' <property>) ] "}"
+
+// Define an object property, which consists of a string key and a corresponding value separated by a colon
+<property> ::= <string> ":" <value>
+
+// Define a boolean value, which can be either true or false
+<boolean> ::= "true" | "false"
+
+// Define a string, enclosed in double quotes
+// It can contain any combination of characters except for the double quote and control characters
+<string> ::= "\"" <character>* "\""
+
+// Define a number, which can be an integer or a floating-point value
+// This rule includes optional signs, decimal points, and exponent notation
+<number> ::= ["-"] <integer> [ "." <digit>* ] [ ("e" | "E") ["+" | "-"] <digit>+ ]
+
+// Define an integer, which is a sequence of digits with no leading zeros (except for zero itself)
+<integer> ::= "0" | <non-zero-digit> <digit>*
+
+// Define a digit as any character from 0 to 9
+<digit> ::= "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9"
+
+// Define non-zero digits for integers that shouldn't start with zero
+<non-zero-digit> ::= "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9"
+
+// Define a character in a string, excluding special control characters
+<character> ::= /* any Unicode character except " and control characters */
